@@ -1,6 +1,4 @@
 
--- 解决下载超时
-require("nvim-treesitter.install").prefer_git = true
 require("core.plugins-setup")
 
 require("core.options")
@@ -11,7 +9,9 @@ require("configs.lualine") --状态栏
 require("configs.nvim-tree") --文档树
 
 require("configs.treesitter") -- 语法高亮
-require("configs.lsp") -- 
+require("configs.lsp") --lsp 
+require("configs.handlers").setup() --lsp 
+--require("configs.lspsaga") --lsp ui
 require("configs.cmp")
 
 require("configs.comment") --gcc注释
@@ -21,4 +21,5 @@ require("configs.bufferline") --buffer分割
 require("configs.gitsigns") --左侧git提示
 require("configs.telescope") -- 文件检索
 require("configs.notity") -- 文件检索
+require("configs.toggleterm") -- 文件检索
 

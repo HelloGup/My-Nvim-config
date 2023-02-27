@@ -25,17 +25,21 @@ keymap.set("n", "srh", "<C-w>b<C-w>K",opts)
 keymap.set("n", "srv", "<C-w>b<C-w>H",opts) 
 
 --qf关闭当前窗口
-vim.keymap.set("n", "qf", "<C-w>q", opts)
+keymap.set("n", "qf", "<C-w>q", opts)
 --qc仅保留当前窗口
-vim.keymap.set("n", "qc", "<C-w>o", opts)
+keymap.set("n", "qc", "<C-w>o", opts)
 
 -- 调整窗口大小
-vim.keymap.set("n", "<up>", ":res +3<cr>", opts)
-vim.keymap.set("n", "<down>", ":res -3<cr>", opts)
-vim.keymap.set("n", "<left>", ":vertical resize+3<cr>", opts)
-vim.keymap.set("n", "<right>", ":vertical resize-3<cr>", opts)
+keymap.set("n", "<up>", ":res +3<cr>", opts)
+keymap.set("n", "<down>", ":res -3<cr>", opts)
+keymap.set("n", "<left>", ":vertical resize+3<cr>", opts)
+keymap.set("n", "<right>", ":vertical resize-3<cr>", opts)
 
-
+-- Better window navigation
+-- keymap.set("n", "<C-h>", "<C-w>h", opts)
+-- keymap.set("n", "<C-j>", "<C-w>j", opts)
+-- keymap.set("n", "<C-k>", "<C-w>k", opts)
+-- keymap.set("n", "<C-l>", "<C-w>l", opts)
 
 keymap.set("n", "\\", ":nohl<CR>",opts) -- 取消搜索高亮 "\"键
 
@@ -75,13 +79,28 @@ keymap.set("n", "dL", "d$",opts)
 keymap.set("n", "Y", "y$",opts)
 
 -- 切换buffer
--- buffer switcher
-vim.keymap.set("n", "bh", ":bp<CR>", opts)
-vim.keymap.set("n", "bl", ":bn<CR>", opts)
+keymap.set("n", "bl", ":BufferLineCycleNext<CR>", opts)
+keymap.set("n", "bh", ":BufferLineCyclePrev<CR>", opts)
 
--- ---------- 插件 ---------- ---
 -- open nvim-tree
-keymap.set("n", "tt", ":NvimTreeToggle<CR>",opts)
+keymap.set("n", "qw", ":NvimTreeToggle<CR>",opts)
+
+-- debug
+keymap.set("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint(); require'user.dap.dap-util'.store_breakpoints(true)<cr>", opts)
+keymap.set("n", "<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", opts)
+-- keymap("n", "<leader>dr", "lua require'dap'.repl.open()<cr>", opts)
+keymap.set("n", "<F9>", "<cmd>lua require'dap'.run_last()<cr>", opts)
+keymap.set('n', '<F10>', '<cmd>lua require"user.dap.dap-util".reload_continue()<CR>', opts)
+keymap.set("n", "<F4>", "<cmd>lua require'dap'.terminate()<cr>", opts)
+keymap.set("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", opts)
+keymap.set("n", "<F6>", "<cmd>lua require'dap'.step_over()<cr>", opts)
+keymap.set("n", "<F7>", "<cmd>lua require'dap'.step_into()<cr>", opts)
+keymap.set("n", "<F8>", "<cmd>lua require'dap'.step_out()<cr>", opts)
+keymap.set("n", "K", "<cmd>lua require'dapui'.eval()<cr>", opts)
+
+-- comment
+keymap.set("n", "gcf", "<cmd>Dox<cr>", opts)
+
 
 
 

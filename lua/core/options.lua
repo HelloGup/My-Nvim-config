@@ -20,6 +20,12 @@ opt.undodir = vim.fn.expand("~/.config/nvim/.tmp/undo")
 --使用+=-连在一起的单词认为是一个单词
 vim.cmd([[set iskeyword+=-]])
 
+-- creates a swapfile
+opt.swapfile = false
+
+--不生成备份文件
+opt.backup = false
+
 -- 自动折行
 opt.wrap = true
 
@@ -49,7 +55,7 @@ opt.autowrite = true
 --光标上下移动保留的行数
 opt.scrolloff = 10
 
---取消换行自动输入
+--取消新行自动注释
 vim.api.nvim_create_autocmd({ "FileType" },{
     pattern = { "*" },
     command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
@@ -79,7 +85,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- 外观
 opt.termguicolors = true -- 终端真颜色
-opt.signcolumn = "yes" --左侧多一列
+-- 左侧标识列
+opt.signcolumn = "yes"
 
 -- 主题
 vim.cmd[[colorscheme tokyonight-moon]]

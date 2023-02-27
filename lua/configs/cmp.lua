@@ -135,7 +135,7 @@ end
 
 require("luasnip.loaders.from_vscode").lazy_load() -- load freindly-snippets
 require("luasnip.loaders.from_vscode").load({ paths = { -- load custom snippets
-  vim.fn.stdpath("config") .. "/my-snippets"
+  vim.fn.stdpath("config") .. "/my-snippets" --自定义代码片段的路径
 } }) -- Load snippets from my-snippets folder
 
 cmp_config = {
@@ -235,25 +235,28 @@ cmp_config = {
     { name = "crates" },
   },
   mapping = cmp.mapping.preset.insert {
+      --滚动候选框
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
+
+    --滚动候选框的详细介绍
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     -- TODO: potentially fix emmet nonsense
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand()
-      elseif jumpable(1) then
-        luasnip.jump(1)
-      elseif check_backspace() then
-        fallback()
-      elseif is_emmet_active() then
-        return vim.fn["cmp#complete"]()
-      else
-        fallback()
-      end
+        if cmp.visible() then
+            cmp.select_next_item()
+        elseif luasnip.expandable() then
+            luasnip.expand()
+        elseif jumpable(1) then
+            luasnip.jump(1)
+        elseif check_backspace() then
+            fallback()
+        elseif is_emmet_active() then
+            return vim.fn["cmp#complete"]()
+        else
+            fallback()
+        end
     end, {
       "i",
       "s",
@@ -275,10 +278,10 @@ cmp_config = {
     ["<C-e>"] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping(function(fallback)
       if cmp.visible() and cmp.confirm(cmp_config.confirm_opts) then
-        if jumpable(1) then
-          luasnip.jump(1)
-        end
-        return
+          if jumpable(1) then
+              luasnip.jump(1)
+          end
+          return
       end
 
       if jumpable(1) then

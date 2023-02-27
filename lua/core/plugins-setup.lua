@@ -12,12 +12,12 @@ end
 local packer_bootstrap = ensure_packer()
 
 -- 保存自动安装插件
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
-  augroup end
-]])
+-- vim.cmd([[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
+--   augroup end
+-- ]])
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
@@ -33,13 +33,20 @@ return require('packer').startup(function(use)
     }
   }
   use "christoomey/vim-tmux-navigator" -- 用ctl-hjkl来定位窗口
-  use "nvim-treesitter/nvim-treesitter" -- 语法高亮
-  use "p00f/nvim-ts-rainbow" -- 配合treesitter，不同括号颜色区分
+
+-- Treesittetr 高亮
+    use "nvim-treesitter/nvim-treesitter"
+    use "p00f/nvim-ts-rainbow" -- 配合treesitter，不同括号颜色区分
+  -- use "romgrk/nvim-treesitter-context" -- show class/function at the top
+  ----------------------------------------------
+
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",  -- 这个相当于mason.nvim和lspconfig的桥梁
     "neovim/nvim-lspconfig"
 }
+use{"glepnir/lspsaga.nvim"} -- lsp ui
+
     -- 自动补全
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-nvim-lsp"
@@ -49,6 +56,11 @@ return require('packer').startup(function(use)
     use "hrsh7th/cmp-path" -- 文件路径
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/cmp-buffer" 
+    use "hrsh7th/cmp-nvim-lua"
+    -------------------------
+
+    --终端
+    use "akinsho/toggleterm.nvim"
     
 
     use "numToStr/Comment.nvim" -- gcc和gc注释
@@ -57,10 +69,27 @@ return require('packer').startup(function(use)
     use "akinsho/bufferline.nvim" -- buffer分割线
     use "lewis6991/gitsigns.nvim" -- 左则git提示
 
-    use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',  -- 文件检索
-        requires = { {'nvim-lua/plenary.nvim'} }
-    }
+    -- 文件检索
+    use { 
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    commit="10f62ecc6f6282e65adedaa3a0f18daea05664e64",
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use {
+    "nvim-telescope/telescope.nvim",
+    tag = "nvim-0.6",
+  }
+  use "nvim-telescope/telescope-ui-select.nvim"
+  use "nvim-telescope/telescope-rg.nvim"
+  use "nvim-telescope/telescope-dap.nvim"
+  -- 调试
+  use 'mfussenegger/nvim-dap'
+  
+  --书签
+  use "MattesGroeger/vim-bookmarks"
+  use "tom-anders/telescope-vim-bookmarks.nvim"
+
+  ------------------------------------------------------
 
     --右上角通知
     use "rcarriga/nvim-notify"
