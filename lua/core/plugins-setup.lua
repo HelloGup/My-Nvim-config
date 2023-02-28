@@ -91,6 +91,10 @@ use{"glepnir/lspsaga.nvim"} -- lsp ui
 
   ------------------------------------------------------
 
+  --底部cmdline 改为通知显示
+  use  "folke/noice.nvim"
+  use  "MunifTanjim/nui.nvim"
+------------------------------
     --右上角通知
     use "rcarriga/nvim-notify"
     -- My plugins here

@@ -7,8 +7,11 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
+--格式化代码
+keymap.set('n',"<leader>fo","gg=G",opts)
 
-keymap.set("i", "jj", "<ESC>:w<CR>",opts)  -- jj退出并保存 
+--jj退出
+keymap.set("i", "jj", "<ESC>",opts) 
 keymap.set("i", "<ESC>", "<ESC>:w<CR>",opts)  -- jj退出并保存 
 keymap.set("n", "<ESC>", ":w<CR>",opts) 
 

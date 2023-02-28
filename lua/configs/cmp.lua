@@ -244,9 +244,9 @@ cmp_config = {
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     -- TODO: potentially fix emmet nonsense
     ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-            cmp.select_next_item()
-        elseif luasnip.expandable() then
+        --if cmp.visible() then
+         --   cmp.select_next_item()
+        if luasnip.expandable() then
             luasnip.expand()
         elseif jumpable(1) then
             luasnip.jump(1)

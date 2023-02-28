@@ -14,6 +14,8 @@ require("configs.handlers").setup() --lsp
 --require("configs.lspsaga") --lsp ui
 require("configs.cmp")
 
+require("configs.noice")
+
 require("configs.comment") --gcc注释
 require("configs.autopairs") --自动括号
 
