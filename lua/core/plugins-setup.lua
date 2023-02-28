@@ -1,12 +1,12 @@
 local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+    local fn = vim.fn
+    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
 
 local packer_bootstrap = ensure_packer()
@@ -20,32 +20,32 @@ local packer_bootstrap = ensure_packer()
 -- ]])
 
 return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use 'folke/tokyonight.nvim' -- tokyonight主题
-  use {
-    'nvim-lualine/lualine.nvim',  -- 状态栏
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }  -- 状态栏图标
-  }
-  use {
-    'nvim-tree/nvim-tree.lua',  -- 文档树
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- 文档树图标
+    use 'wbthomason/packer.nvim'
+    use 'folke/tokyonight.nvim' -- tokyonight主题
+    use {
+        'nvim-lualine/lualine.nvim',  -- 状态栏
+        --requires = { 'kyazdani42/nvim-web-devicons', opt = true }  -- 状态栏图标
     }
-  }
-  use "christoomey/vim-tmux-navigator" -- 用ctl-hjkl来定位窗口
+    use {
+        'nvim-tree/nvim-tree.lua',  -- 文档树
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- 文档树图标
+        }
+    }
+    use "christoomey/vim-tmux-navigator" -- 用ctl-hjkl来定位窗口
 
--- Treesittetr 高亮
+    -- Treesittetr 高亮
     use "nvim-treesitter/nvim-treesitter"
     use "p00f/nvim-ts-rainbow" -- 配合treesitter，不同括号颜色区分
-  -- use "romgrk/nvim-treesitter-context" -- show class/function at the top
-  ----------------------------------------------
+    -- use "romgrk/nvim-treesitter-context" -- show class/function at the top
+    ----------------------------------------------
 
-  use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",  -- 这个相当于mason.nvim和lspconfig的桥梁
-    "neovim/nvim-lspconfig"
-}
-use{"glepnir/lspsaga.nvim"} -- lsp ui
+    use {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",  -- 这个相当于mason.nvim和lspconfig的桥梁
+        "neovim/nvim-lspconfig"
+    }
+    use{"glepnir/lspsaga.nvim"} -- lsp ui
 
     -- 自动补全
     use "hrsh7th/nvim-cmp"
@@ -61,7 +61,7 @@ use{"glepnir/lspsaga.nvim"} -- lsp ui
 
     --终端
     use "akinsho/toggleterm.nvim"
-    
+
 
     use "numToStr/Comment.nvim" -- gcc和gc注释
     use "windwp/nvim-autopairs" -- 自动补全括号
@@ -69,32 +69,42 @@ use{"glepnir/lspsaga.nvim"} -- lsp ui
     use "akinsho/bufferline.nvim" -- buffer分割线
     use "lewis6991/gitsigns.nvim" -- 左则git提示
 
-    -- 文件检索
+    -- 文件检索 
+    -- 文本搜索本机环境需要安装rigpre
     use { 
-    "nvim-telescope/telescope-live-grep-args.nvim",
-    commit="10f62ecc6f6282e65adedaa3a0f18daea05664e64",
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
-  use {
-    "nvim-telescope/telescope.nvim",
-    tag = "nvim-0.6",
-  }
-  use "nvim-telescope/telescope-ui-select.nvim"
-  use "nvim-telescope/telescope-rg.nvim"
-  use "nvim-telescope/telescope-dap.nvim"
-  -- 调试
-  use 'mfussenegger/nvim-dap'
-  
-  --书签
-  use "MattesGroeger/vim-bookmarks"
-  use "tom-anders/telescope-vim-bookmarks.nvim"
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        commit="10f62ecc6f6282e65adedaa3a0f18daea05664e64",
+        requires = { {'nvim-lua/plenary.nvim'} }
+    }
+    use "nvim-lua/popup.nvim"
+    use {
+        "nvim-telescope/telescope.nvim",
+        tag = "nvim-0.6",
+    }
+    use "nvim-telescope/telescope-ui-select.nvim"
+    use "nvim-telescope/telescope-rg.nvim"
+    use "nvim-telescope/telescope-dap.nvim"
+    -- 调试
+    use 'mfussenegger/nvim-dap'
+    -- 模糊查找
+    use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
 
-  ------------------------------------------------------
+    use {
+        "nvim-telescope/telescope-file-browser.nvim",
+        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    }
 
-  --底部cmdline 改为通知显示
-  use  "folke/noice.nvim"
-  use  "MunifTanjim/nui.nvim"
-------------------------------
+
+    --书签
+    use "MattesGroeger/vim-bookmarks"  
+    use "tom-anders/telescope-vim-bookmarks.nvim"
+
+    ------------------------------------------------------
+
+    --底部cmdline 改为通知显示
+    use  "folke/noice.nvim"
+    use  "MunifTanjim/nui.nvim"
+    ------------------------------
     --右上角通知
     use "rcarriga/nvim-notify"
     -- My plugins here

@@ -61,6 +61,7 @@ nvim_tree.setup({
     },
   },
   renderer = {
+      --缩进标记
     indent_markers = {
       enable = false,
       icons = {
@@ -117,6 +118,7 @@ nvim_tree.setup({
       restrict_above_cwd = false,
     },
     open_file = {
+        --打开文件后是否退出
       quit_on_open = false,
       resize_window = true,
       window_picker = {

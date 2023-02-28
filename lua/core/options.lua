@@ -13,7 +13,7 @@ opt.cindent = true
 opt.smartindent = true
 
 --持久性撤销
-vim.bo.undofile =true
+opt.undofile =true
 --持久性撤销文件保存目录，需要确保目录已经存在
 opt.undodir = vim.fn.expand("~/.config/nvim/.tmp/undo")
 

@@ -1,11 +1,23 @@
 local builtin = require('telescope.builtin')
 
 -- 进入telescope页面会是插入模式，回到正常模式就可以用j和k来移动了
+vim.keymap.set('n', 'ff', builtin.find_files, {})
+-- 自带的不支持正则
+vim.keymap.set('n', 'fG', builtin.live_grep, {})  -- 环境里要安装ripgrep
+vim.keymap.set('n', 'fb', builtin.buffers, {})
+vim.keymap.set('n', 'fh', builtin.help_tags, {})
+-- 书签查找
+vim.api.nvim_set_keymap("n", "fm", "<Cmd>Telescope marks<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "fj", "<Cmd>Telescope jumplist<CR>", {noremap = true, silent = true})
+-- 历史文件
+vim.api.nvim_set_keymap("n", "fo", "<cmd>Telescope oldfiles<cr>",{noremap = true, silent = true})
+-- file_browser
+vim.api.nvim_set_keymap("n", "fe", "<cmd>Telescope file_browser<cr>", {noremap = true, silent = true})
+-- 带正则表达式的内容搜索
+vim.api.nvim_set_keymap("n", "fg", "<cmd>Telescope live_grep_args<cr>", {noremap = true, silent = true})
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})  -- 环境里要安装ripgrep
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+-- 未装
+--vim.api.nvim_set_keymap("n", "<leader>/", "Telescope current_buffer_fuzzy_find<CR>",{noremap = true, silent = true})
 ------------------------------------------------------------------
 
 
@@ -58,8 +70,8 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-  vim.notify("telescope not found!")
-  return
+    vim.notify("telescope not found!")
+    return
 end
 
 local actions = require "telescope.actions"
@@ -68,165 +80,174 @@ local actions = require "telescope.actions"
 local previewers = require("telescope.previewers")
 local Job = require("plenary.job")
 local new_maker = function(filepath, bufnr, opts)
-  filepath = vim.fn.expand(filepath)
-  Job:new({
-    command = "file",
-    args = { "--mime-type", "-b", filepath },
-    on_exit = function(j)
-      local mime_type = vim.split(j:result()[1], "/")[1]
-      if mime_type == "text" then
-        previewers.buffer_previewer_maker(filepath, bufnr, opts)
-      else
-        -- maybe we want to write something to the buffer here
-        vim.schedule(function()
-          vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY" })
-        end)
-      end
-    end
-  }):sync()
+    filepath = vim.fn.expand(filepath)
+    Job:new({
+        command = "file",
+        args = { "--mime-type", "-b", filepath },
+        on_exit = function(j)
+            local mime_type = vim.split(j:result()[1], "/")[1]
+            if mime_type == "text" then
+                previewers.buffer_previewer_maker(filepath, bufnr, opts)
+            else
+                -- maybe we want to write something to the buffer here
+                vim.schedule(function()
+                    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY" })
+                end)
+            end
+        end
+    }):sync()
 end
 
 telescope.setup {
-  defaults = {
-    buffer_previewer_maker = new_maker,
+    defaults = {
+        buffer_previewer_maker = new_maker,
 
-    prompt_prefix = " ",
-    selection_caret = " ",
-    path_display = {
-      shorten = {
-        -- e.g. for a path like
-        --   `alpha/beta/gamma/delta.txt`
-        -- setting `path_display.shorten = { len = 1, exclude = {1, -1} }`
-        -- will give a path like:
-        --   `alpha/b/g/delta.txt`
-        len = 3, exclude = { 1, -1 }
-      },
+        prompt_prefix = " ",
+        selection_caret = " ",
+        path_display = {
+            shorten = {
+                -- e.g. for a path like
+                --   `alpha/beta/gamma/delta.txt`
+                -- setting `path_display.shorten = { len = 1, exclude = {1, -1} }`
+                -- will give a path like:
+                --   `alpha/b/g/delta.txt`
+                len = 3, exclude = { 1, -1 }
+            },
+        },
+
+        mappings = {
+            i = {
+                --历史记录
+                ["<C-n>"] = actions.cycle_history_next,
+                ["<C-p>"] = actions.cycle_history_prev,
+
+                -- 滚动
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+                --或
+                ["<Down>"] = actions.move_selection_next,
+                ["<Up>"] = actions.move_selection_previous,
+
+                --关闭窗口
+                ["<C-c>"] = actions.close,
+
+                ["<CR>"] = actions.select_default,
+
+                --打开分屏方式
+                ["<C-x>"] = actions.select_horizontal,
+                ["<C-v>"] = actions.select_vertical,
+                ["<C-t>"] = actions.select_tab,
+
+                ["<PageUp>"] = actions.results_scrolling_up,
+                ["<PageDown>"] = actions.results_scrolling_down,
+
+                ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                ["<C-l>"] = actions.complete_tag,
+                ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+            },
+
+            n = {
+                ["<esc>"] = actions.close,
+                ["<CR>"] = actions.select_default,
+                ["<C-x>"] = actions.select_horizontal,
+                ["<C-v>"] = actions.select_vertical,
+                ["<C-t>"] = actions.select_tab,
+
+                ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+
+                ["j"] = actions.move_selection_next,
+                ["k"] = actions.move_selection_previous,
+                ["H"] = actions.move_to_top,
+                ["M"] = actions.move_to_middle,
+                ["L"] = actions.move_to_bottom,
+
+                ["<Down>"] = actions.move_selection_next,
+                ["<Up>"] = actions.move_selection_previous,
+                ["gg"] = actions.move_to_top,
+                ["G"] = actions.move_to_bottom,
+
+                ["<C-u"] = actions.preview_scrolling_up,
+                ["<C-d>"] = actions.preview_scrolling_down,
+
+                ["<PageUp>"] = actions.results_scrolling_up,
+                ["<PageDown>"] = actions.results_scrolling_down,
+
+                ["?"] = actions.which_key,
+            },
+        },
     },
+    pickers = {
+        find_files = {
+            --主题样式
+            theme = "dropdown",
+            previewer = false,
 
-    mappings = {
-      i = {
-          --历史记录
-        ["<C-n>"] = actions.cycle_history_next,
-        ["<C-p>"] = actions.cycle_history_prev,
+            --fd 命令可能会比find快一点
+            find_command = { "find", "-type", "f" },
+            -- find_command = { "fd", "-H" , "-I"},  -- "-H" search hidden files, "-I" do not respect to gitignore
+        },
 
-        -- 滚动
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-        --或
-        ["<Down>"] = actions.move_selection_next,
-        ["<Up>"] = actions.move_selection_previous,
+        -- Default configuration for builtin pickers goes here:
+        -- picker_name = {
+            --   picker_config_key = value,
+            --   ...
+            -- }
+            -- Now the picker_config_key will be applied every time you call this
+            -- builtin picker
+        },
+        extensions = {
+            -- Your extension configuration goes here:
+            -- extension_name = {
+                --   extension_config_key = value,
+                -- }
 
-        --关闭窗口
-        ["<C-c>"] = actions.close,
+                -- fzf syntax
+                -- Token	Match type	Description
+                -- sbtrkt	fuzzy-match	Items that match sbtrkt
+                -- 'wild'	exact-match (quoted)	Items that include wild
+                -- ^music	prefix-exact-match	Items that start with music
+                -- .mp3$	suffix-exact-match	Items that end with .mp3
+                -- !fire	inverse-exact-match	Items that do not include fire
+                -- !^music	inverse-prefix-exact-match	Items that do not start with music
+                -- !.mp3$	inverse-suffix-exact-match	Items that do not end with .mp3
+                fzf = {
+                    fuzzy = true, -- false will only do exact matching
+                    override_generic_sorter = true, -- override the generic sorter
+                    override_file_sorter = true, -- override the file sorter
+                    case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                    -- the default case_mode is "smart_case"
+                },
 
-        ["<CR>"] = actions.select_default,
 
-        --打开分屏方式
-        ["<C-x>"] = actions.select_horizontal,
-        ["<C-v>"] = actions.select_vertical,
-        ["<C-t>"] = actions.select_tab,
+                file_browser = {
+                    theme = "ivy",
+                    -- disables netrw and use telescope-file-browser in its place
+                    hijack_netrw = true,
+                },
 
-        ["<PageUp>"] = actions.results_scrolling_up,
-        ["<PageDown>"] = actions.results_scrolling_down,
+                ["ui-select"] = {
+                    require("telescope.themes").get_dropdown {
+                        -- even more opts
+                    }
+                },
+                live_grep_raw = {
+                    auto_quoting = true, -- enable/disable auto-quoting
+                }
+            },
+        }
 
-        ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-        ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-        ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-        ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-        ["<C-l>"] = actions.complete_tag,
-        ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-      },
-
-      n = {
-        ["<esc>"] = actions.close,
-        ["<CR>"] = actions.select_default,
-        ["<C-x>"] = actions.select_horizontal,
-        ["<C-v>"] = actions.select_vertical,
-        ["<C-t>"] = actions.select_tab,
-
-        ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-        ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-        ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-        ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-
-        ["j"] = actions.move_selection_next,
-        ["k"] = actions.move_selection_previous,
-        ["H"] = actions.move_to_top,
-        ["M"] = actions.move_to_middle,
-        ["L"] = actions.move_to_bottom,
-
-        ["<Down>"] = actions.move_selection_next,
-        ["<Up>"] = actions.move_selection_previous,
-        ["gg"] = actions.move_to_top,
-        ["G"] = actions.move_to_bottom,
-
-        ["<C-u"] = actions.preview_scrolling_up,
-        ["<C-d>"] = actions.preview_scrolling_down,
-
-        ["<PageUp>"] = actions.results_scrolling_up,
-        ["<PageDown>"] = actions.results_scrolling_down,
-
-        ["?"] = actions.which_key,
-      },
-    },
-  },
-  pickers = {
-    find_files = {
-        --主题样式
-      theme = "dropdown",
-      previewer = false,
-
-      --fd 命令可能会比find快一点
-      find_command = { "find", "-type", "f" },
-      -- find_command = { "fd", "-H" , "-I"},  -- "-H" search hidden files, "-I" do not respect to gitignore
-    },
-
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
-  },
-  extensions = {
-    -- Your extension configuration goes here:
-    -- extension_name = {
-    --   extension_config_key = value,
-    -- }
-
-    -- fzf syntax
-    -- Token	Match type	Description
-    -- sbtrkt	fuzzy-match	Items that match sbtrkt
-    -- 'wild'	exact-match (quoted)	Items that include wild
-    -- ^music	prefix-exact-match	Items that start with music
-    -- .mp3$	suffix-exact-match	Items that end with .mp3
-    -- !fire	inverse-exact-match	Items that do not include fire
-    -- !^music	inverse-prefix-exact-match	Items that do not start with music
-    -- !.mp3$	inverse-suffix-exact-match	Items that do not end with .mp3
-    -- fzf = {
-    --   fuzzy = true, -- false will only do exact matching
-    --   override_generic_sorter = true, -- override the generic sorter
-    --   override_file_sorter = true, -- override the file sorter
-    --   case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-    --   -- the default case_mode is "smart_case"
-    -- },
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown {
-        -- even more opts
-      }
-    },
-    live_grep_raw = {
-      auto_quoting = false, -- enable/disable auto-quoting
-    }
-  },
-}
-
--- telescope.load_extension("frecency")
--- telescope.load_extension('fzf')
-telescope.load_extension("ui-select")
-telescope.load_extension('dap')
-telescope.load_extension('vim_bookmarks')
-telescope.load_extension("live_grep_args")
--- load project extension. see project.lua file
+        -- telescope.load_extension("frecency")
+        telescope.load_extension('file_browser')
+        telescope.load_extension('fzf')
+        telescope.load_extension("ui-select")
+        telescope.load_extension('dap')
+        telescope.load_extension('vim_bookmarks')
+        telescope.load_extension("live_grep_args")
+        -- load project extension. see project.lua filek
 

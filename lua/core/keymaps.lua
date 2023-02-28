@@ -8,7 +8,10 @@ vim.g.mapleader = " "
 local keymap = vim.keymap
 
 --格式化代码
-keymap.set('n',"<leader>fo","gg=G",opts)
+keymap.set('n',"<leader>fo","gg=G<C-o>",opts)
+
+-- 
+keymap.set('n',"Q",":q<CR>",opts)
 
 --jj退出
 keymap.set("i", "jj", "<ESC>",opts) 
@@ -100,10 +103,6 @@ keymap.set("n", "<F6>", "<cmd>lua require'dap'.step_over()<cr>", opts)
 keymap.set("n", "<F7>", "<cmd>lua require'dap'.step_into()<cr>", opts)
 keymap.set("n", "<F8>", "<cmd>lua require'dap'.step_out()<cr>", opts)
 keymap.set("n", "K", "<cmd>lua require'dapui'.eval()<cr>", opts)
-
--- comment
-keymap.set("n", "gcf", "<cmd>Dox<cr>", opts)
-
 
 
 
