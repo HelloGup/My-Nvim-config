@@ -100,6 +100,8 @@ return require('packer').startup(function(use)
     use "tom-anders/telescope-vim-bookmarks.nvim"
 
     ------------------------------------------------------
+    -- 缩进线
+    use "lukas-reineke/indent-blankline.nvim"
 
     --底部cmdline 改为通知显示
     use  "folke/noice.nvim"

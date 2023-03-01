@@ -9,6 +9,7 @@ require("configs.lualine") --状态栏
 require("configs.nvim-tree") --文档树
 
 require("configs.treesitter") -- 语法高亮
+require("configs.indentline") -- 语法高亮
 require("configs.lsp") --lsp 
 require("configs.handlers").setup() --lsp 
 --require("configs.lspsaga") --lsp ui
