@@ -11,7 +11,7 @@ M.setup = function()
     { name = "DiagnosticSignInfo", text = "" },
   }
 
-  for _, sign in ipairs(signs) do
+     for _, sign in ipairs(signs) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 
@@ -39,6 +39,7 @@ M.setup = function()
 
   vim.diagnostic.config(config)
 
+
   -- set the popup window border
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
@@ -47,6 +48,24 @@ M.setup = function()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
   })
+
+end
+
+-- 高亮文档内其它地方的选中内容
+local function lsp_highlight_document(client)
+  -- Set autocommands conditional on server_capabilities
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_exec(
+      [[
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]],
+      false
+    )
+  end
 end
 
 return M

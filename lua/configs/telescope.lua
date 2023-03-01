@@ -8,7 +8,7 @@ vim.keymap.set('n', 'fb', builtin.buffers, {})
 vim.keymap.set('n', 'fh', builtin.help_tags, {})
 -- 书签查找
 vim.api.nvim_set_keymap("n", "fm", "<Cmd>Telescope marks<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "fj", "<Cmd>Telescope jumplist<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "fu", "<Cmd>Telescope jumplist<CR>", {noremap = true, silent = true})
 -- 历史文件
 vim.api.nvim_set_keymap("n", "fo", "<cmd>Telescope oldfiles<cr>",{noremap = true, silent = true})
 -- file_browser
@@ -111,7 +111,7 @@ telescope.setup {
                 -- setting `path_display.shorten = { len = 1, exclude = {1, -1} }`
                 -- will give a path like:
                 --   `alpha/b/g/delta.txt`
-                len = 3, exclude = { 1, -1 }
+               len = 3, exclude = { 1, -1 }
             },
         },
 

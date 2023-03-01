@@ -96,7 +96,7 @@ return require('packer').startup(function(use)
 
 
     --书签
-    use "MattesGroeger/vim-bookmarks"  
+    use "MattesGroeger/vim-bookmarks"
     use "tom-anders/telescope-vim-bookmarks.nvim"
 
     ------------------------------------------------------
