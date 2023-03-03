@@ -36,8 +36,8 @@ keymap.set("n", "qf", "<C-w>q", opts)
 keymap.set("n", "qc", "<C-w>o", opts)
 
 -- 调整窗口大小
-keymap.set("n", "<up>", ":res +3<cr>", opts)
-keymap.set("n", "<down>", ":res -3<cr>", opts)
+-- keymap.set("n", "<up>", ":res +3<cr>", opts)
+-- keymap.set("n", "<down>", ":res -3<cr>", opts)
 keymap.set("n", "<left>", ":vertical resize+3<cr>", opts)
 keymap.set("n", "<right>", ":vertical resize-3<cr>", opts)
 
@@ -87,6 +87,17 @@ keymap.set("n", "Y", "y$",opts)
 -- 切换buffer
 keymap.set("n", "bl", ":BufferLineCycleNext<CR>", opts)
 keymap.set("n", "bh", ":BufferLineCyclePrev<CR>", opts)
+keymap.set("n", "b1", ":BufferLineGoToBuffer 1<CR>", opts)
+keymap.set("n", "b2", ":BufferLineGoToBuffer 2<CR>", opts)
+keymap.set("n", "b3", ":BufferLineGoToBuffer 3<CR>", opts)
+keymap.set("n", "b4", ":BufferLineGoToBuffer 4<CR>", opts)
+keymap.set("n", "b5", ":BufferLineGoToBuffer 5<CR>", opts)
+keymap.set("n", "b6", ":BufferLineGoToBuffer 6<CR>", opts)
+keymap.set("n", "b7", ":BufferLineGoToBuffer 7<CR>", opts)
+keymap.set("n", "b8", ":BufferLineGoToBuffer 8<CR>", opts)
+keymap.set("n", "b9", ":BufferLineGoToBuffer 9<CR>", opts)
+-- 关闭当前buffer 不关闭窗口
+keymap.set("n", "bd", ":bd<CR>", opts)
 
 -- open nvim-tree
 keymap.set("n", "qw", ":NvimTreeToggle<CR>",opts)

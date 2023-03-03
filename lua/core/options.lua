@@ -53,7 +53,7 @@ opt.incsearch = true --边输入边搜索
 opt.autowrite = true
 
 --光标上下移动保留的行数
-opt.scrolloff = 10
+opt.scrolloff = 5
 
 --取消新行自动注释
 vim.api.nvim_create_autocmd({ "FileType" },{

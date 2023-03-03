@@ -31,7 +31,7 @@ notify.setup({
   background_colour = "Normal",
 
   -- Minimum width for notification windows
-  minimum_width = 50,
+  minimum_width = 30,
 
   -- Icons for the different levels
   icons = {

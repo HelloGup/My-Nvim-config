@@ -249,5 +249,6 @@ telescope.setup {
         telescope.load_extension('dap')
         telescope.load_extension('vim_bookmarks')
         telescope.load_extension("live_grep_args")
+        -- telescope.load_extension("notify") -- 用来搜索通知
         -- load project extension. see project.lua filek
 
