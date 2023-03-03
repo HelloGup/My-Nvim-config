@@ -26,3 +26,19 @@ nnoremap <silent><Leader>z :call ZoomToggle()<CR>
 
 " 书签图标
 let g:bookmark_sign = ''
+
+
+" F2 行号开关，用于鼠标复制代码用,为方便复制，用<F2>开启/关闭行号显示:
+function! HideNumber() 
+	if(&relativenumber == &number) 
+		set relativenumber! number! 
+	elseif(&number) 
+		set number! 
+	else 
+		set relativenumber! 
+	endif 
+		set number? 
+endfunc 
+nnoremap <silent><F2> :call HideNumber()<CR>
+
+

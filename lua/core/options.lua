@@ -89,6 +89,8 @@ opt.termguicolors = true -- 终端真颜色
 opt.signcolumn = "yes"
 
 -- 主题
-vim.cmd[[colorscheme tokyonight-moon]]
+vim.cmd[[colorscheme tokyonight-night]]
 
+-- vim.o.background = "dark" -- or "light" for light mode
+-- vim.cmd([[colorscheme gruvbox]])
 

@@ -74,7 +74,7 @@ keymap.set("n", "gj", "j",opts)
 keymap.set("n", "yG", "ggyG<C-o>",opts)
 
 --跳行首行尾
-keymap.set("n", "H", "0",opts)
+keymap.set("n", "H", "^",opts)
 keymap.set("n", "L", "$",opts)
 
 --删至 行首 行尾
@@ -91,6 +91,8 @@ keymap.set("n", "bh", ":BufferLineCyclePrev<CR>", opts)
 -- open nvim-tree
 keymap.set("n", "qw", ":NvimTreeToggle<CR>",opts)
 
+
+
 -- debug
 keymap.set("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint(); require'user.dap.dap-util'.store_breakpoints(true)<cr>", opts)
 keymap.set("n", "<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", opts)
@@ -102,7 +104,7 @@ keymap.set("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", opts)
 keymap.set("n", "<F6>", "<cmd>lua require'dap'.step_over()<cr>", opts)
 keymap.set("n", "<F7>", "<cmd>lua require'dap'.step_into()<cr>", opts)
 keymap.set("n", "<F8>", "<cmd>lua require'dap'.step_out()<cr>", opts)
-keymap.set("n", "K", "<cmd>lua require'dapui'.eval()<cr>", opts)
+-- keymap.set("n", "K", "<cmd>lua require'dapui'.eval()<cr>", opts)
 
 
 
