@@ -65,6 +65,7 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
     --问题发送到窗口
     --vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
 end
 
 -- Add additional capabilities supported by nvim-cmp

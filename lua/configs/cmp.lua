@@ -133,6 +133,7 @@ if not status_luasnip_ok then
   return
 end
 
+-- 加载代码片段
 require("luasnip.loaders.from_vscode").lazy_load() -- load freindly-snippets
 require("luasnip.loaders.from_vscode").load({ paths = { -- load custom snippets
   vim.fn.stdpath("config") .. "/my-snippets" --自定义代码片段的路径
@@ -147,8 +148,9 @@ cmp_config = {
     ---@usage The minimum length of a word to complete on.
     keyword_length = 1,
   },
+  -- 灰色显示可能输入的
   experimental = {
-    ghost_text = false,
+    ghost_text = true,
     native_menu = false,
   },
   formatting = {
@@ -239,9 +241,9 @@ cmp_config = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
 
-    --滚动候选框的详细介绍
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    --滚动候选框的详细介绍 目前未实现
+    -- ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
     -- TODO: potentially fix emmet nonsense
     ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
@@ -257,18 +259,6 @@ cmp_config = {
         else
             fallback()
         end
-    end, {
-      "i",
-      "s",
-    }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
     end, {
       "i",
       "s",
@@ -294,6 +284,8 @@ cmp_config = {
     end),
   },
 }
+
+-- 配置搜索和cmdline的补全
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
@@ -320,7 +312,7 @@ cmp.setup.cmdline(':', {
 })
 
 -- disable autocompletion for guihua
-vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
-vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
+-- vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
+-- vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
 
 cmp.setup(cmp_config)

@@ -25,4 +25,6 @@ require("configs.gitsigns") --左侧git提示
 require("configs.telescope")
 require("configs.notity") --通知
 require("configs.toggleterm") -- 终端
+require("configs.aerial") -- 终端
+
 

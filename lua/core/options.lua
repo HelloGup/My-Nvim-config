@@ -10,7 +10,6 @@ opt.shiftwidth = 4
 opt.expandtab = true
 opt.autoindent = true
 opt.cindent = true
-opt.smartindent = true
 
 --持久性撤销
 opt.undofile =true

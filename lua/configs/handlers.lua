@@ -37,6 +37,7 @@ M.setup = function()
     },
   }
 
+
   vim.diagnostic.config(config)
 
 

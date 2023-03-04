@@ -6,7 +6,7 @@ vim.keymap.set('n', 'ff', builtin.find_files, {})
 vim.keymap.set('n', 'fG', builtin.live_grep, {})  -- 环境里要安装ripgrep
 vim.keymap.set('n', 'fb', builtin.buffers, {})
 vim.keymap.set('n', 'fh', builtin.help_tags, {})
--- 书签查找
+-- 书签查找 --mm添加书签 --mi 在当前行编辑注释
 vim.api.nvim_set_keymap("n", "fm", "<Cmd>Telescope marks<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "fu", "<Cmd>Telescope jumplist<CR>", {noremap = true, silent = true})
 -- 历史文件
@@ -15,6 +15,10 @@ vim.api.nvim_set_keymap("n", "fo", "<cmd>Telescope oldfiles<cr>",{noremap = true
 vim.api.nvim_set_keymap("n", "fe", "<cmd>Telescope file_browser<cr>", {noremap = true, silent = true})
 -- 带正则表达式的内容搜索
 vim.api.nvim_set_keymap("n", "fg", "<cmd>Telescope live_grep_args<cr>", {noremap = true, silent = true})
+--当前文档符号搜索
+vim.api.nvim_set_keymap("n", "fs", "<cmd>Telescope lsp_document_symbols<cr>", {noremap = true, silent = true})
+--项目符号搜索
+vim.api.nvim_set_keymap("n", "fs", "<cmd>Telescope lsp_dynamic_workspace_symbols", {noremap = true, silent = true})
 
 -- 未装
 --vim.api.nvim_set_keymap("n", "<leader>/", "Telescope current_buffer_fuzzy_find<CR>",{noremap = true, silent = true})
@@ -236,6 +240,7 @@ telescope.setup {
                         -- even more opts
                     }
                 },
+
                 live_grep_raw = {
                     auto_quoting = true, -- enable/disable auto-quoting
                 }
@@ -246,7 +251,7 @@ telescope.setup {
         telescope.load_extension('file_browser')
         telescope.load_extension('fzf')
         telescope.load_extension("ui-select")
-        telescope.load_extension('dap')
+        -- telescope.load_extension('dap')
         telescope.load_extension('vim_bookmarks')
         telescope.load_extension("live_grep_args")
         -- telescope.load_extension("notify") -- 用来搜索通知

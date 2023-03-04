@@ -45,7 +45,7 @@ return require('packer').startup(function(use)
         "williamboman/mason-lspconfig.nvim",  -- 这个相当于mason.nvim和lspconfig的桥梁
         "neovim/nvim-lspconfig"
     }
-    use{"glepnir/lspsaga.nvim"} -- lsp ui
+    -- use{"glepnir/lspsaga.nvim"} -- lsp ui
 
     -- 自动补全
     use "hrsh7th/nvim-cmp"
@@ -62,6 +62,8 @@ return require('packer').startup(function(use)
     --终端
     use "akinsho/toggleterm.nvim"
 
+    -- 对选中文字进行高亮
+    -- use "Pocco81/HighStr.nvim"
 
     use "numToStr/Comment.nvim" -- gcc和gc注释
     use "windwp/nvim-autopairs" -- 自动补全括号
@@ -83,9 +85,6 @@ return require('packer').startup(function(use)
     }
     use "nvim-telescope/telescope-ui-select.nvim"
     use "nvim-telescope/telescope-rg.nvim"
-    use "nvim-telescope/telescope-dap.nvim"
-    -- 调试
-    use 'mfussenegger/nvim-dap'
     -- 模糊查找
     use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
 
@@ -107,6 +106,8 @@ return require('packer').startup(function(use)
     use  "folke/noice.nvim"
     use  "MunifTanjim/nui.nvim"
     ------------------------------
+    -- 文档大纲
+    use "stevearc/aerial.nvim"
     --右上角通知
     use "rcarriga/nvim-notify"
     -- My plugins here
