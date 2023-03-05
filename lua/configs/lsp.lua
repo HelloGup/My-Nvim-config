@@ -52,8 +52,8 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    -- 代码格式化
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
+    -- 代码格式化 缩进为两个空格暂不使用，使用keymap映射实现
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 
     --跳转到上一个或下一个错误
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gk', '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>',

@@ -119,6 +119,7 @@ aerial.setup({
   -- Only works when manage_folds = true
   link_folds_to_tree = false,
 
+     -- 打开折叠符号时也折叠代码
   -- Fold code when you open/collapse symbols in the tree.
   -- Only works when manage_folds = true
   link_tree_to_folds = false,

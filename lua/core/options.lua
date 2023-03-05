@@ -12,9 +12,9 @@ opt.autoindent = true
 opt.cindent = true
 
 --持久性撤销
-opt.undofile =true
+--opt.undofile =true
 --持久性撤销文件保存目录，需要确保目录已经存在
-opt.undodir = vim.fn.expand("~/.config/nvim/.tmp/undo")
+-- opt.undodir = vim.fn.expand("~/.config/nvim/.tmp/undo")
 
 --使用+=-连在一起的单词认为是一个单词
 vim.cmd([[set iskeyword+=-]])

@@ -8,14 +8,13 @@ vim.g.mapleader = " "
 local keymap = vim.keymap
 
 --格式化代码
-keymap.set('n',"<leader>fo","gg=G<C-o>",opts)
+keymap.set('n',"<leader>f","gg=G<C-o>",opts)
 
 -- 
-keymap.set('n',"Q",":q<CR>",opts)
+keymap.set('n',"<leader>q",":q<CR>",opts)
 
 --jj退出
 keymap.set("i", "jj", "<ESC>",opts) 
-keymap.set("i", "<ESC>", "<ESC>:w<CR>",opts)  -- jj退出并保存 
 keymap.set("n", "<ESC>", ":w<CR>",opts) 
 
 keymap.set("v", "J", ":m '>+1<CR>gv=gv",opts) --视觉模式下上下移动代码
@@ -38,8 +37,8 @@ keymap.set("n", "qc", "<C-w>o", opts)
 -- 调整窗口大小
 -- keymap.set("n", "<up>", ":res +3<cr>", opts)
 -- keymap.set("n", "<down>", ":res -3<cr>", opts)
-keymap.set("n", "<left>", ":vertical resize+3<cr>", opts)
-keymap.set("n", "<right>", ":vertical resize-3<cr>", opts)
+--keymap.set("n", "<left>", ":vertical resize+3<cr>", opts)
+--keymap.set("n", "<right>", ":vertical resize-3<cr>", opts)
 
 -- Better window navigation
 -- keymap.set("n", "<C-h>", "<C-w>h", opts)
@@ -105,16 +104,16 @@ keymap.set("n", "qw", ":NvimTreeToggle<CR>",opts)
 
 
 -- debug
-keymap.set("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint(); require'user.dap.dap-util'.store_breakpoints(true)<cr>", opts)
-keymap.set("n", "<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", opts)
--- keymap("n", "<leader>dr", "lua require'dap'.repl.open()<cr>", opts)
-keymap.set("n", "<F9>", "<cmd>lua require'dap'.run_last()<cr>", opts)
-keymap.set('n', '<F10>', '<cmd>lua require"user.dap.dap-util".reload_continue()<CR>', opts)
-keymap.set("n", "<F4>", "<cmd>lua require'dap'.terminate()<cr>", opts)
-keymap.set("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", opts)
-keymap.set("n", "<F6>", "<cmd>lua require'dap'.step_over()<cr>", opts)
-keymap.set("n", "<F7>", "<cmd>lua require'dap'.step_into()<cr>", opts)
-keymap.set("n", "<F8>", "<cmd>lua require'dap'.step_out()<cr>", opts)
+-- keymap.set("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint(); require'user.dap.dap-util'.store_breakpoints(true)<cr>", opts)
+-- keymap.set("n", "<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", opts)
+-- -- keymap("n", "<leader>dr", "lua require'dap'.repl.open()<cr>", opts)
+-- keymap.set("n", "<F9>", "<cmd>lua require'dap'.run_last()<cr>", opts)
+-- keymap.set('n', '<F10>', '<cmd>lua require"user.dap.dap-util".reload_continue()<CR>', opts)
+-- keymap.set("n", "<F4>", "<cmd>lua require'dap'.terminate()<cr>", opts)
+-- keymap.set("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", opts)
+-- keymap.set("n", "<F6>", "<cmd>lua require'dap'.step_over()<cr>", opts)
+-- keymap.set("n", "<F7>", "<cmd>lua require'dap'.step_into()<cr>", opts)
+-- keymap.set("n", "<F8>", "<cmd>lua require'dap'.step_out()<cr>", opts)
 -- keymap.set("n", "K", "<cmd>lua require'dapui'.eval()<cr>", opts)
 
 
