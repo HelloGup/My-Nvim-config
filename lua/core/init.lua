@@ -28,7 +28,7 @@ require("configs.bufferline") --buffer分割
 require("configs.gitsigns") --左侧git提示
 require("configs.telescope")
 require("configs.notity") --通知
-require("configs.toggleterm") -- 终端
-require("configs.aerial") -- 终端
+-- require("configs.toggleterm") -- 终端  使用tmux后用处不大
+require("configs.aerial") -- 文档大纲
 
 

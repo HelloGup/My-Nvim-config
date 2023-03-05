@@ -53,7 +53,7 @@ gitsigns.setup {
         vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
     end
 
-    -- Navigation
+    -- Navigation 上下跳至有修改的地方
     map('n', '<leader>j', ':Gitsigns next_hunk<CR>')
     map('n', '<leader>k',':Gitsigns prev_hunk<CR>')
 
@@ -66,7 +66,8 @@ gitsigns.setup {
     map('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>')
     map('n', '<leader>hb', '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
     map('n', '<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
-    map('n', '<leader>hd', '<cmd>Gitsigns diffthis<CR>')
+    --对比文件不同
+    map("n", "<leader>hd", "<cmd>Gitsigns diffthis<CR>") 
     map('n', '<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
     map('n', '<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
     --
