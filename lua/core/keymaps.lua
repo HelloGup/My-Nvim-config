@@ -8,7 +8,7 @@ vim.g.mapleader = " "
 local keymap = vim.keymap
 
 --格式化代码
-keymap.set('n',"<leader>f","gg=G<C-o>",opts)
+-- keymap.set('n',"<leader>f","gg=G<C-o>",opts)
 
 -- 
 keymap.set('n',"<leader>q",":q<CR>",opts)

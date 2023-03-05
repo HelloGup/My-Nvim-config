@@ -134,7 +134,7 @@ if not status_luasnip_ok then
 end
 
 -- 加载代码片段
-require("luasnip.loaders.from_vscode").lazy_load() -- load freindly-snippets
+--require("luasnip.loaders.from_vscode").lazy_load() -- load freindly-snippets
 require("luasnip.loaders.from_vscode").load({ paths = { -- load custom snippets
   vim.fn.stdpath("config") .. "/my-snippets" --自定义代码片段的路径
 } }) -- Load snippets from my-snippets folder
