@@ -11,10 +11,11 @@ local keymap = vim.keymap
 -- keymap.set('n',"<leader>f","gg=G<C-o>",opts)
 
 -- 
-keymap.set('n',"<leader>q",":q<CR>",opts)
+keymap.set('n',"<leader>q",":wq<CR>",opts)
+keymap.set('n',"<leader>w",":w<CR>",opts)
 
 --jj退出
-keymap.set("i", "jj", "<ESC>",opts) 
+keymap.set("i", "jj", "<ESC>:w<CR>",opts) 
 keymap.set("n", "<ESC>", ":w<CR>",opts) 
 
 keymap.set("v", "J", ":m '>+1<CR>gv=gv",opts) --视觉模式下上下移动代码
