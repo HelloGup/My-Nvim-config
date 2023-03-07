@@ -104,7 +104,9 @@ end
 
 telescope.setup {
     defaults = {
-        buffer_previewer_maker = new_maker,
+        -- windows 下oldfiles报错z使用第二条
+        -- buffer_previewer_maker = new_maker,
+        buffer_previewer_maker = nil,
 
         prompt_prefix = " ",
         selection_caret = " ",
@@ -249,11 +251,11 @@ telescope.setup {
 
         -- telescope.load_extension("frecency")
         telescope.load_extension('file_browser')
-        telescope.load_extension('fzf')
+        -- telescope.load_extension('fzf')
         telescope.load_extension("ui-select")
         -- telescope.load_extension('dap')
         telescope.load_extension('vim_bookmarks')
         telescope.load_extension("live_grep_args")
-        -- telescope.load_extension("notify") -- 用来搜索通知
+        telescope.load_extension("notify") -- 用来搜索通知
         -- load project extension. see project.lua filek
 

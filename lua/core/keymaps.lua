@@ -13,7 +13,6 @@ local keymap = vim.keymap
 -- 
 keymap.set('n',"<leader>q",":wq<CR>",opts)
 keymap.set('n',"<leader>w",":w<CR>",opts)
-
 --jj退出
 keymap.set("i", "jj", "<ESC>:w<CR>",opts) 
 keymap.set("n", "<ESC>", ":w<CR>",opts) 

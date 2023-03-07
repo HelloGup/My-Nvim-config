@@ -28,8 +28,7 @@ end
 
 nvim_tree.setup({
   auto_reload_on_write = true,
-  --auto_close=true, -- 关闭文件时自动关闭
-  disable_netrw = false,
+ -- disable_netrw = false,
   hijack_cursor = false,
   hijack_netrw = true,
   hijack_unnamed_buffer_when_opening = false,
@@ -158,8 +157,13 @@ require "nvim-tree.events".on_file_created(function(file) vim.cmd("edit " .. fil
 -- require"nvim-tree.events".on_file_created(function(file) vim.cmd("edit "..vim.fn.fnamemodify(file.fname, ":p")) end)
 
 -- auto close feature
-vim.cmd(
-  [[
-    autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-]]
-)
+vim.api.nvim_create_autocmd("BufEnter", {
+  nested = true,
+  callback = function()
+    if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+      vim.cmd "quit"
+    end
+  end
+})
+
+

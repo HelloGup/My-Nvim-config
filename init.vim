@@ -41,4 +41,33 @@ function! HideNumber()
 endfunc 
 nnoremap <silent><F2> :call HideNumber()<CR>
 
-
+"背景透明
+" highlight NormalNC guibg=NONE ctermbg=none
+" highlight Comment guibg=NONE ctermbg=none
+" highlight Constant guibg=NONE ctermbg=none
+" highlight Special guibg=NONE ctermbg=none
+" highlight Identifier guibg=NONE ctermbg=none
+" highlight Statement guibg=NONE ctermbg=none
+" highlight PreProc guibg=NONE ctermbg=none
+" highlight Type guibg=NONE ctermbg=none
+" highlight Underlined guibg=NONE ctermbg=none
+" highlight Todo guibg=NONE ctermbg=none
+" highlight String guibg=NONE ctermbg=none
+" highlight Function guibg=NONE ctermbg=none
+" highlight Conditional guibg=NONE ctermbg=none
+" highlight Repeat guibg=NONE ctermbg=none
+" highlight Operator guibg=NONE ctermbg=none
+" highlight Structure guibg=NONE ctermbg=none
+" highlight LineNr guibg=NONE ctermbg=none
+" highlight NonText guibg=NONE ctermbg=none
+" 左侧图标列背景
+" highlight SignColumn guibg=NONE ctermbg=none
+" highlight CursorLineNr guibg=NONE ctermbg=none
+" highlight Normal guibg=NONE ctermbg=none
+" highlight EndOfBuffer guibg=NONE ctermbg=none
+" highlight BufferLineTabClose guibg=NONE ctermbg=none
+" highlight BufferlineBufferSelected guibg=NONE ctermbg=none
+" highlight BufferLineFill guibg=NONE ctermbg=none
+" highlight BufferLineBackground guibg=NONE ctermbg=none
+" highlight BufferLineSeparator guibg=NONE ctermbg=none
+" highlight BufferLineIndicatorSelected guibg=NONE ctermbg=none
