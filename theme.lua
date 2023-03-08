@@ -612,7 +612,7 @@ function M.setup()
 
     -- Notify
     --- Border
-    NotifyERRORBorder = { fg = util.darken(c.error, 0.3), bg = options.transparent and c.none or c.bg },
+    NotifyERRORBorder = { fg = util.darken(c.error, 0.3), bg = c.none },
     NotifyWARNBorder = { fg = util.darken(c.warning, 0.3), bg = c.none},
     NotifyINFOBorder = { fg = util.darken(c.info, 0.3), bg = c.none },
     NotifyDEBUGBorder = { fg = util.darken(c.comment, 0.3), bg = c.none},

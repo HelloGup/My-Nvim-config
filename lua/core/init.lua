@@ -16,10 +16,10 @@ require("configs.treesitter") -- 语法高亮
 require("configs.indentline") -- 缩进线
 require("configs.lsp") --lsp 
 require("configs.handlers").setup() --lsp 
---require("configs.lspsaga") --lsp ui
-require("configs.cmp")
+-- require("configs.lspsaga") --lsp ui
+require("configs.cmp") --代码补全
 
-require("configs.noice")
+require("configs.noice") --命令行美化
 
 require("configs.comment") --gcc注释
 require("configs.autopairs") --自动括号
@@ -28,7 +28,7 @@ require("configs.bufferline") --buffer分割
 require("configs.gitsigns") --左侧git提示
 require("configs.telescope")
 require("configs.notity") --通知
--- require("configs.toggleterm") -- 终端  使用tmux后用处不大
+require("configs.toggleterm") -- 终端
 require("configs.aerial") -- 文档大纲
 
 

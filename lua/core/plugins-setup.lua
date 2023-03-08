@@ -45,7 +45,6 @@ return require('packer').startup(function(use)
         "williamboman/mason-lspconfig.nvim",  -- 这个相当于mason.nvim和lspconfig的桥梁
         "neovim/nvim-lspconfig"
     }
-    -- use{"glepnir/lspsaga.nvim"} -- lsp ui
 
     -- 自动补全
     use "hrsh7th/nvim-cmp"
@@ -59,8 +58,8 @@ return require('packer').startup(function(use)
     use "hrsh7th/cmp-nvim-lua"
     -------------------------
 
-    -- 终端(使用tmux后用处不大)
-    -- use "akinsho/toggleterm.nvim"
+    -- 终端
+    use "akinsho/toggleterm.nvim"
 
     -- 对选中文字进行高亮
     -- use "Pocco81/HighStr.nvim"
