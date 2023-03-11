@@ -13,6 +13,7 @@ local keymap = vim.keymap
 -- 
 keymap.set('n',"<leader>q",":wq<CR>",opts)
 keymap.set('n',"<leader>w",":w<CR>",opts)
+
 --jj退出
 keymap.set("i", "jj", "<ESC>:w<CR>",opts) 
 keymap.set("n", "<ESC>", ":w<CR>",opts) 
@@ -46,7 +47,8 @@ keymap.set("n", "qc", "<C-w>o", opts)
 -- keymap.set("n", "<C-k>", "<C-w>k", opts)
 -- keymap.set("n", "<C-l>", "<C-w>l", opts)
 
-keymap.set("n", "\\", ":nohl<CR>",opts) -- 取消搜索高亮 "\"键
+-- 取消本次搜索高亮结果
+keymap.set("n", "\\", ":nohl<CR>",opts) 
 
 
 --快速移动
@@ -76,11 +78,12 @@ keymap.set("n", "yG", "ggyG<C-o>",opts)
 keymap.set("n", "H", "^",opts)
 keymap.set("n", "L", "$",opts)
 
---删至 行首 行尾
+--删至 行首 行尾为D
 keymap.set("n", "dH", "d0",opts)
-keymap.set("n", "dL", "d$",opts)
+-- keymap.set("n", "dL", "d$",opts)
 
---Y复制到行尾
+--Y复制到行首行尾
+keymap.set("n", "yH", "d0",opts)
 keymap.set("n", "Y", "y$",opts)
 
 -- 切换buffer
